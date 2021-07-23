@@ -7,10 +7,6 @@ export const useAnimal = () => {
 export const AnimalProvider = ({ children }) => {
 const [animal, setAnimal] = React.useState()
 
-const getAnimal = React.useMemo(() => {
-  return animal
-}, [animal])
-
 const updateAnimal = (value) => {
   setAnimal(value)
 }
@@ -18,7 +14,7 @@ const updateAnimal = (value) => {
   return (
     <AnimalContext.Provider
     value={{
-      getAnimal,
+      animal,
       updateAnimal
     }}>
       {children}
@@ -28,6 +24,6 @@ const updateAnimal = (value) => {
 
 
 export const AnimalContext = React.createContext({
-  getAnimal: () => null,
+  animal: () => null,
   updateAnimal: () => null,
 })
