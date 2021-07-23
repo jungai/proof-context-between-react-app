@@ -1,17 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createContext, useState, useContext } from "react";
+import ReactDOM from "react-dom";
+
+import App from "./App";
+import App2 from "./App2";
+
+const rootApp1 = document.getElementById("app1");
+const rootApp2 = document.getElementById("app2");
+
+export const MyLoveContext = createContext();
+
+export function useMyLoveContext() {
+  const context = useContext(MyLoveContext);
+  if (!context) {
+    throw new Error("always iu");
+  }
+
+  return context;
+}
+
+const MyLoveProvider = (props) => {
+  const [name, setName] = useState("iu");
+
+  return (
+    <MyLoveContext.Provider value={{ name, setName }}>
+      {props.children}
+    </MyLoveContext.Provider>
+  );
+};
 
 ReactDOM.render(
-  <React.StrictMode>
+  <MyLoveProvider>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </MyLoveProvider>,
+  rootApp1
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+  <MyLoveProvider>
+    <App2 />
+  </MyLoveProvider>,
+  rootApp2
+);

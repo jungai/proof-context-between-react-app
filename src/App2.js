@@ -1,13 +1,13 @@
 import { useMyLoveContext } from "./index";
 
-export default function App() {
+export default function App2() {
   const { name, setName } = useMyLoveContext();
 
   return (
     <div className="App">
-      <h1>Hello App1</h1>
+      <h1>Hello App2</h1>
       <p>{name}</p>
-      <button onClick={() => setName("yoona")}>change to yoona</button>
+      <button onClick={() => setName("rose")}>change to rose</button>
     </div>
   );
 }
